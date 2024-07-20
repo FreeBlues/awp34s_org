@@ -1,0 +1,79 @@
+
+name: Android CI
+
+on:
+
+  push:
+
+    branches: [ "master" ]
+
+  pull_request:
+
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v4
+
+    - name: set up JDK 17
+
+      uses: actions/setup-java@v3
+
+      with:
+
+        java-version: '17'
+
+        distribution: 'temurin'
+
+        cache: gradle
+
+    - name: Prepare Env
+
+      run: sudo apt-get install -y patch unzip build-essential libncurses-dev subversion
+
+    - name: Setup Android SDK
+
+      uses: android-actions/setup-android@v3.2.1
+
+      with:
+
+        # cmdline-tools-version. See https://developer.android.com/studio#command-line-tools-only
+
+        cmdline-tools-version: 11076708
+
+        # Android SDK is usable only after the license agreement. Should setup-android agree to the licences, provided by "sdkmanager --licenses"
+
+        accept-android-sdk-licenses: true
+
+        # Should accepted licenses be logged. If not, accepted licences will be accepted silently
+
+        log-accepted-android-sdk-licenses: true
+
+        # Additional packages to install
+
+        packages: platform-tools ndk-bundle
+
+    - name: Build
+
+      run: make
+
+    - name: Upload a Build Artifact
+
+      uses: actions/upload-artifact@v4.3.4
+
+      with:
+
+        # Artifact name
+
+        name: Build APK
+
+        # A file, directory or wildcard pattern that describes what to upload
+
+        path: app/build/outputs/apk/release/app-release-unsigned.apk
+        
