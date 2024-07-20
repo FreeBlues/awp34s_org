@@ -3,7 +3,7 @@ app/build/outputs/apk/debug/app-debug.apk: gradle-6.8.2/bin/gradle app/src/main/
 	gradle-6.8.2/bin/gradle build
 
 app/src/main/cpp/keys.c: app/src/main/cpp/PATCH
-	cd app/src/main/cpp && ./apply_patch --binary
+	cd app/src/main/cpp && ./apply_patch
 
 gradle-6.8.2/bin/gradle: gradle-6.8.2-bin.zip
 	unzip gradle-6.8.2-bin.zip
