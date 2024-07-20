@@ -7,8 +7,8 @@ then
     svn checkout -$REV svn://svn.code.sf.net/p/wp34s/code/trunk/ wp34s-code-$REV-trunk
 fi
 cd wp34s-code-$REV-trunk
-patch < ../makefile.diff
-patch < ../xeq.diff
+patch --binary < ../makefile.diff
+patch --binary < ../xeq.diff
 make
 cp -r Linux64/consts/ consts
 cd ..
@@ -21,4 +21,4 @@ for file in $(cat SVN_MANIFEST)
 do
     cp wp34s-code-$REV-trunk/$file $file
 done
-patch -p1 < PATCH
+patch --binary -p1 < PATCH
