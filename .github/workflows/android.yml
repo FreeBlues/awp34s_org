@@ -36,6 +36,9 @@ jobs:
     - name: Prepare Env
 
       run: sudo apt-get install -y patch unzip build-essential libncurses-dev subversion
+    - name: Convert line endings
+      run: |
+        find . -type f -name "*.c" -o -name "*.h" -exec dos2unix {} \;
 
     - name: Setup Android SDK
 
