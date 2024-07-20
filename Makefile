@@ -10,7 +10,7 @@ gradle-6.8.2/bin/gradle: gradle-6.8.2-bin.zip
 	touch gradle-6.8.2/bin/gradle
 
 gradle-6.8.2-bin.zip:
-	wget https://downloads.gradle-dn.com/distributions/gradle-6.8.2-bin.zip
+	wget https://services.gradle.org/distributions/gradle-6.8.2-bin.zip
 
 gradlew: gradle-6.8.2/bin/gradle
 	gradle-6.8.2/bin/gradle wrapper
